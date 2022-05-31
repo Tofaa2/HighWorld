@@ -3,6 +3,7 @@ package quest.highworld.commands.utility;
 import org.bukkit.entity.Player;
 import quest.highworld.commands.Command;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HelpCommand implements Command {
@@ -37,7 +38,7 @@ public class HelpCommand implements Command {
 
     @Override
     public List<String> getAliases() {
-        return List.of("?", "h", "help", "pleasehelpme", "info");
+        return Arrays.asList("?", "h", "help", "pleasehelpme", "info");
     }
 
 

@@ -3,3 +3,9 @@ version: 1.0
 author: Tofaa
 main: quest.highworld.HighWorld
 
+commands:
+  highworld:
+    description: Main HighWorld command
+    aliases:
+      - hw
+      - hworld

@@ -2,23 +2,25 @@ package quest.highworld.factory.itemstack;
 
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
+import quest.highworld.HighWorld;
 
 import java.util.HashMap;
 
 public class ItemManager {
 
-    @Getter private final HashMap<String, ItemStack> defaultItems;
+    @Getter private final HashMap<String, HighWorldItem> items;
 
     public ItemManager() {
-        defaultItems = new HashMap<>();
+        items = new HashMap<>();
     }
 
-    public void addItem(String name, ItemStack item) {
-        defaultItems.put(name, item);
+    public void addItem(String name, HighWorldItem item) {
+        HighWorld.getInstance().getLogger().info("Adding Item ID: " + name);
+        items.put(name, item);
     }
 
     public ItemStack getItem(String name) {
-        return defaultItems.get(name);
+        return items.get(name);
     }
 
 }

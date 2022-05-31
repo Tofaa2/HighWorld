@@ -1,7 +1,7 @@
 package quest.highworld.factory.itemstack;
 
 import lombok.Getter;
-import org.bukkit.ChatColor;
+import quest.highworld.utilities.Strings;
 
 public enum Rarity {
 
@@ -16,8 +16,8 @@ public enum Rarity {
     @Getter private final String cc;
 
     Rarity(String cc, String prefix) {
-        this.cc = ChatColor.translateAlternateColorCodes('&', cc + "&l");
-        this.prefix = cc + ChatColor.translateAlternateColorCodes('&', prefix);
+        this.cc = Strings.cc(cc);
+        this.prefix = Strings.cc(cc + "&l" + prefix);
     }
 
 

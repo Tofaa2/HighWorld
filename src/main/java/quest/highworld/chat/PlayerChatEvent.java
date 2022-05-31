@@ -12,6 +12,7 @@ import quest.highworld.HighWorld;
 import quest.highworld.commands.Command;
 import quest.highworld.database.StatsManager;
 import quest.highworld.event.PacketHighWorldListener;
+import quest.highworld.factory.itemstack.weapon.TestSword;
 import quest.highworld.utilities.Strings;
 
 import java.text.SimpleDateFormat;
