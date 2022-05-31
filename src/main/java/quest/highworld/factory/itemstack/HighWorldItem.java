@@ -1,10 +1,12 @@
 package quest.highworld.factory.itemstack;
 
+import de.tr7zw.nbtapi.NBTItem;
 import lombok.Getter;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import quest.highworld.factory.itemstack.ability.ItemAbility;
+import quest.highworld.factory.itemstack.ability.ItemAbilityInteractionType;
 import quest.highworld.utilities.Strings;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class HighWorldItem extends ItemStack {
     @Getter private final String name;
     @Getter private final List<String> lore;
 
+    @Getter private final ItemStack bukkitClone;
+
     public HighWorldItem(String id, Material material, String name, List<String> lore,  int amount, Rarity rarity){
         super(material, amount);
         this.material = material;
@@ -33,7 +37,12 @@ public class HighWorldItem extends ItemStack {
         meta.setDisplayName(Strings.cc(rarity.getCc() + name));
         meta.setLore(this.lore);
         this.setItemMeta(meta);
+        NBTItem nbtItem = new NBTItem(this);
+        nbtItem.setString("id", id);
+        nbtItem.setString("Ability", ItemAbility.FIREBALL_LARGE_SHOOT.name());
+        nbtItem.setString("Ability-Interaction", ItemAbilityInteractionType.ENTITY_HIT.name());
 
+        this.bukkitClone = nbtItem.getItem();
 
     }
 

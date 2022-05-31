@@ -32,16 +32,6 @@ public class CommandsManager {
                         return false;
                     }
                     Player player = (Player) commandSender;
-                    if (args.length == 0) {
-                        String format = Strings.cc(
-                                Messages.PREFIX.get()
-                                        + Messages.THEME_MAIN.get()
-                                        + "/highworld " + Messages.THEME_SECONDARY.get() + "%name%" + Messages.THEME_MAIN.get() + " - %description%"
-                        );
-                        player.sendMessage(format.replace("%name%", command.getName()).replace("%description%", command.getDescription()));
-                        return false;
-                    }
-
                     if (!HighWorld.getInstance().getPermissionManager().hasPermission(player, command.getPermission())){
                         player.sendMessage(Strings.cc(Messages.PREFIX.get()) + Messages.NO_PERMISSION.get());
                         return false;

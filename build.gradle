@@ -31,11 +31,13 @@ repositories {
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
     maven { url = 'https://jitpack.io/' } // PacketEvents
+
 }
 
 dependencies {
 
     implementation 'com.github.retrooper.packetevents:spigot:2.0-SNAPSHOT'
+    implementation files('lib/item-nbt-api-plugin-2.9.2.jar')
 
     compileOnly 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
 }
@@ -43,7 +45,8 @@ dependencies {
 shadowJar {
     minimize()
     relocate('io.github.retrooper.packetevents', 'quest.highworld.shadow.packetevents.io')
-    relocate 'com.github.retrooper.packetevents', 'quest.highworld.shadow.packetevents.com'
+    relocate('com.github.retrooper.packetevents', 'quest.highworld.shadow.packetevents.com')
+    relocate('de.tr7zw', 'quest.highworld.shadow.nbtapi')
 }
 
 

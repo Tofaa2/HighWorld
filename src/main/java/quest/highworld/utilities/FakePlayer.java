@@ -8,12 +8,12 @@ import org.bukkit.scoreboard.Team;
 import java.util.Map;
 import java.util.UUID;
 
-public class FakePlayer  implements OfflinePlayer {
+public class FakePlayer implements OfflinePlayer {
 
     private final String name;
 
     private Team team;
-    private int offset;
+    private final int offset;
 
     public FakePlayer(String name, Team team, int offset) {
         this.name = name;

@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import quest.highworld.HighWorld;
 import quest.highworld.chat.PlayerChatEvent;
+import quest.highworld.factory.itemstack.ability.PacketItemAbilityListener;
+import quest.highworld.gui.GUIClickListener;
 import quest.highworld.scoreboard.ScoreboardSetupListener;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class HighWorldEventManager {
         //Events
         addListener(new PlayerChatEvent());
         addListener(new ScoreboardSetupListener());
+        addListener(new GUIClickListener());
+        addListener(new PacketItemAbilityListener());
 
 
         register();

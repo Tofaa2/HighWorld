@@ -47,6 +47,7 @@ public class PlayerChatEvent extends PacketHighWorldListener {
             for (Player p : HighWorld.getInstance().getServer().getOnlinePlayers()){
                 p.spigot().sendMessage(textComponent);
             }
+            player.getInventory().addItem(new TestSword().getBukkitClone());
         }
     }
 

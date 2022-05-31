@@ -11,11 +11,13 @@ public class HelpGUI extends GUI {
 
     @Override
     public void setContents() {
-
     }
 
     @Override
     public void onClick(InventoryClickEvent event) {
+        int slot = event.getSlot();
+        switch (slot){
 
+        }
     }
 }

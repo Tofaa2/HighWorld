@@ -9,15 +9,17 @@ import quest.highworld.event.BukkitHighWorldListener;
 
 public class GUIClickListener extends BukkitHighWorldListener {
 
-
-
     @EventHandler(priority = EventPriority.LOW)
     public void onInventoryClick(InventoryClickEvent event) {
         InventoryHolder holder = event.getInventory().getHolder();
         if (!(holder instanceof GUI)) return;
         event.setCancelled(true);
         GUI gui = (GUI) holder;
-        gui.playClick((Player) event.getWhoClicked().getInventory().addItem());
+        gui.playClick((Player) event.getWhoClicked());
+        if (gui.getInventory().getItem(event.getSlot()).isSimilar(GUI.close())){
+            event.getWhoClicked().closeInventory();
+            return;
+        }
         gui.onClick(event);
     }
 

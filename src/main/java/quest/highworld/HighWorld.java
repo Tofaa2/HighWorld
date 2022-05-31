@@ -11,6 +11,7 @@ import quest.highworld.database.SettingsManager;
 import quest.highworld.database.StatsManager;
 import quest.highworld.database.impl.PlayerDataManager;
 import quest.highworld.event.HighWorldEventManager;
+import quest.highworld.factory.projectile.ProjectileManager;
 import quest.highworld.scoreboard.ScoreboardManager;
 import quest.highworld.utilities.nms.NMSUtil;
 
@@ -32,6 +33,8 @@ public class HighWorld extends JavaPlugin {
 
     @Getter private NMSUtil NMSUtil;
 
+    @Getter private ProjectileManager projectileManager;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -44,6 +47,7 @@ public class HighWorld extends JavaPlugin {
         NMSUtil = new NMSUtil();
         scoreboardManager = new ScoreboardManager();
         commandsManager = new CommandsManager(this);
+        projectileManager = new ProjectileManager();
 
         registerEvents();
         getDataFolder().mkdirs();
