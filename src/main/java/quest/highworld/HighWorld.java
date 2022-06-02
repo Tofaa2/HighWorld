@@ -35,6 +35,8 @@ public class HighWorld extends JavaPlugin {
 
     @Getter private ProjectileManager projectileManager;
 
+    @Getter private SystemUtilities systemUtilities;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -48,6 +50,7 @@ public class HighWorld extends JavaPlugin {
         scoreboardManager = new ScoreboardManager();
         commandsManager = new CommandsManager(this);
         projectileManager = new ProjectileManager();
+        systemUtilities = new SystemUtilities();
 
         registerEvents();
         getDataFolder().mkdirs();

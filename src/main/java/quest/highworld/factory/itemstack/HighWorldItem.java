@@ -22,7 +22,7 @@ public class HighWorldItem extends ItemStack {
     @Getter private final String name;
     @Getter private final List<String> lore;
 
-    @Getter private final ItemStack bukkitClone;
+    @Getter private final NBTItem nbtItemClone;
 
     public HighWorldItem(String id, Material material, String name, List<String> lore,  int amount, Rarity rarity){
         super(material, amount);
@@ -37,12 +37,11 @@ public class HighWorldItem extends ItemStack {
         meta.setDisplayName(Strings.cc(rarity.getCc() + name));
         meta.setLore(this.lore);
         this.setItemMeta(meta);
-        NBTItem nbtItem = new NBTItem(this);
-        nbtItem.setString("id", id);
-        nbtItem.setString("Ability", ItemAbility.FIREBALL_LARGE_SHOOT.name());
-        nbtItem.setString("Ability-Interaction", ItemAbilityInteractionType.ENTITY_HIT.name());
-
-        this.bukkitClone = nbtItem.getItem();
+        this.nbtItemClone = new NBTItem(this);
+//        nbtItem.setString("id", id);
+//        nbtItem.setString("Ability", ItemAbility.FIREBALL_LARGE_SHOOT.name());
+//        nbtItem.setString("Ability-Interaction", ItemAbilityInteractionType.ENTITY_HIT.name());
+//        nbtItem.getItem();
 
     }
 
@@ -56,6 +55,15 @@ public class HighWorldItem extends ItemStack {
         return b;
     }
 
+    protected void setAbility(ItemAbility ability, ItemAbilityInteractionType interactionType, int cooldown){
+        nbtItemClone.setString("Ability", ability.name());
+        nbtItemClone.setString("Ability-Interaction", interactionType.name());
+        nbtItemClone.setInteger("Ability-Cooldown", cooldown);
+    }
+
+    public ItemStack getNBTItem(){
+        return nbtItemClone.getItem();
+    }
 
 
 }

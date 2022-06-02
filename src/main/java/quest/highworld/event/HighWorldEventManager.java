@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import quest.highworld.HighWorld;
-import quest.highworld.chat.PlayerChatEvent;
+import quest.highworld.chat.PacketPlayerChatListener;
 import quest.highworld.factory.itemstack.ability.PacketItemAbilityListener;
 import quest.highworld.gui.GUIClickListener;
 import quest.highworld.scoreboard.ScoreboardSetupListener;
@@ -25,9 +25,10 @@ public class HighWorldEventManager {
         this.bukkitEvents = new ArrayList<>();
 
         //Events
-        addListener(new PlayerChatEvent());
+        addListener(new PacketPlayerChatListener());
         addListener(new ScoreboardSetupListener());
         addListener(new GUIClickListener());
+
         addListener(new PacketItemAbilityListener());
 
 

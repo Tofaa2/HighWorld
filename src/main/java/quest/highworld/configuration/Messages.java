@@ -32,7 +32,9 @@ public enum Messages {
     TELEPORT_TARGET1_TARGET2(THEME_MAIN.msg + "You teleported %target1% to" + THEME_SECONDARY.msg + "%target2%"),
 
     // World messages
-    TELEPORTED_TO_FLOOR(THEME_MAIN.msg + "You teleported to the floor" + THEME_SECONDARY.msg + " %floor%");
+    TELEPORTED_TO_FLOOR(THEME_MAIN.msg + "You teleported to the floor" + THEME_SECONDARY.msg + " %floor%"),
+
+    ABILITY_ON_COOLDOWN(THEME_MAIN.msg + "You can't use that ability for another %cooldown% seconds!");
 
 
     private final String msg;

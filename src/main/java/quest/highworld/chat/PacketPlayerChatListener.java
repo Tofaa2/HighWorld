@@ -12,14 +12,15 @@ import quest.highworld.HighWorld;
 import quest.highworld.commands.Command;
 import quest.highworld.database.StatsManager;
 import quest.highworld.event.PacketHighWorldListener;
-import quest.highworld.factory.itemstack.weapon.TestSword;
+import quest.highworld.factory.itemstack.weapon.EntityHitSword;
+import quest.highworld.factory.itemstack.weapon.LeftClickSword;
 import quest.highworld.utilities.Strings;
 
 import java.text.SimpleDateFormat;
 
-public class PlayerChatEvent extends PacketHighWorldListener {
+public class PacketPlayerChatListener extends PacketHighWorldListener {
 
-    public PlayerChatEvent(){
+    public PacketPlayerChatListener(){
         super(PacketListenerPriority.HIGH);
     }
 
@@ -47,7 +48,8 @@ public class PlayerChatEvent extends PacketHighWorldListener {
             for (Player p : HighWorld.getInstance().getServer().getOnlinePlayers()){
                 p.spigot().sendMessage(textComponent);
             }
-            player.getInventory().addItem(new TestSword().getBukkitClone());
+            player.getInventory().addItem(new LeftClickSword().getNBTItem());
+            player.getInventory().addItem(new EntityHitSword().getNBTItem());
         }
     }
 

@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import quest.highworld.HighWorld;
+import quest.highworld.factory.itemstack.ability.PacketItemAbilityListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,6 +111,8 @@ public class PlayerDataManager implements Listener {
                 data.lock.release();
             }
         });
+
+        PacketItemAbilityListener.cooldowns.remove(e.getPlayer());
     }
 
     @EventHandler
@@ -122,6 +125,8 @@ public class PlayerDataManager implements Listener {
         HighWorld.getInstance().getPermissionManager().setDefault(p);
         HighWorld.getInstance().getStatsManager().setDefault(p);
         HighWorld.getInstance().getSettingsManager().setDefault(p);
+
+        PacketItemAbilityListener.cooldowns.put(p, new HashMap<>());
 
     }
 
