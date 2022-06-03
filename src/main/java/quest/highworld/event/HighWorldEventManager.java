@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import quest.highworld.HighWorld;
 import quest.highworld.chat.PacketPlayerChatListener;
+import quest.highworld.event.types.PacketHighWorldListener;
 import quest.highworld.factory.itemstack.ability.PacketItemAbilityListener;
 import quest.highworld.gui.GUIClickListener;
 import quest.highworld.scoreboard.ScoreboardSetupListener;
@@ -43,9 +44,11 @@ public class HighWorldEventManager {
 
     public void register(){
         for (PacketHighWorldListener event : packetEvents){
+            HighWorld.getInstance().getLogger().info("Registering packet event: " + event.getClass().getSimpleName());
             PacketEvents.getAPI().getEventManager().registerListener(event);
         }
         for (Listener listener : bukkitEvents){
+            HighWorld.getInstance().getLogger().info("Registering bukkit event: " + listener.getClass().getSimpleName());
             Bukkit.getServer().getPluginManager().registerEvents(listener, HighWorld.getInstance());
         }
     }

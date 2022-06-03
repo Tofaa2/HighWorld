@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import quest.highworld.HighWorld;
 import quest.highworld.configuration.Messages;
-import quest.highworld.event.PacketHighWorldListener;
+import quest.highworld.event.types.PacketHighWorldListener;
 
 import java.util.HashMap;
 

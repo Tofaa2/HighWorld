@@ -6,7 +6,7 @@ import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import quest.highworld.HighWorld;
-import quest.highworld.event.PacketHighWorldListener;
+import quest.highworld.event.types.PacketHighWorldListener;
 
 public class ScoreboardSetupListener extends PacketHighWorldListener {
 

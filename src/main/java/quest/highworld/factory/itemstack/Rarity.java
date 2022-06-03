@@ -5,19 +5,19 @@ import quest.highworld.utilities.Strings;
 
 public enum Rarity {
 
-    COMMON("&f", "COMMON"),
-    UNCOMMON("&a", "UNCOMMON"),
-    RARE("&b", "RARE"),
-    EPIC("&5", "EPIC"),
-    LEGENDARY("&6", "LEGENDARY"),
-    MYTHIC("&d", "MYTHIC");
+    COMMON("&f", "Common"),
+    UNCOMMON("&a", "Uncommon"),
+    RARE("&b", "Rare"),
+    EPIC("&5", "Epic"),
+    LEGENDARY("&6", "Legendary"),
+    MYTHIC("&d", "Mythic");
 
     @Getter private final String prefix;
     @Getter private final String cc;
 
     Rarity(String cc, String prefix) {
         this.cc = Strings.cc(cc);
-        this.prefix = Strings.cc(cc + "&l" + prefix);
+        this.prefix = Strings.cc(cc  + prefix);
     }
 
 

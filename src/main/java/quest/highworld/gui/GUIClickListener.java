@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryHolder;
-import quest.highworld.event.BukkitHighWorldListener;
+import quest.highworld.event.types.BukkitHighWorldListener;
 
 public class GUIClickListener extends BukkitHighWorldListener {
 

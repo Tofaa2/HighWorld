@@ -1,12 +1,7 @@
-package quest.highworld.event;
+package quest.highworld.event.types;
 
 import com.github.retrooper.packetevents.event.*;
 import com.github.retrooper.packetevents.event.simple.*;
-import com.github.retrooper.packetevents.protocol.packettype.PacketType;
-import com.github.retrooper.packetevents.protocol.packettype.PacketTypeCommon;
-import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientChatMessage;
-import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
-import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
