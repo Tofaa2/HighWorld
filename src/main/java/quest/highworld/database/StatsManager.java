@@ -20,6 +20,7 @@ public class StatsManager {
         setStat(player, Stat.PLAYER_LEVEL, 1);
         setStat(player, Stat.PLAYER_XP, 0);
         setStat(player, Stat.COINS, 0);
+        setStat(player, Stat.FLOOR, 0);
 
         setStat(player, Stat.COMBAT_LEVEL, 0);
         setStat(player, Stat.COMBAT_XP, 0);
@@ -54,6 +55,7 @@ public class StatsManager {
         PLAYER_LEVEL,
         PLAYER_XP,
         COINS,
+        FLOOR,
         COMBAT_XP,
         COMBAT_LEVEL,
         MINING_XP,

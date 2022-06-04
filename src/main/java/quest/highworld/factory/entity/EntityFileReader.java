@@ -37,7 +37,12 @@ public class EntityFileReader {
         HighWorld.getInstance().getLogger().info("Saved entity.yml");
     }
 
-    public void load(HashMap<Integer, Object> ids){
+    public HashMap<Integer, Object> load(){
+        HashMap<Integer, Object> map = new HashMap<>();
+        for (String key : entityConfiguration.getKeys(false)) {
+            map.put(Integer.parseInt(key), entityConfiguration.get(key));
+        }
+        return map;
     }
 
     public Object get(String path) {

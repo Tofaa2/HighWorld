@@ -6,26 +6,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import quest.highworld.HighWorld;
 import quest.highworld.database.StatsManager;
-import quest.highworld.scoreboard.type.Entry;
 import quest.highworld.scoreboard.type.Scoreboard;
-import quest.highworld.scoreboard.type.ScoreboardHandler;
 import quest.highworld.scoreboard.util.EntryBuilder;
 import quest.highworld.scoreboard.util.HighlightedString;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class ScoreboardManager {
 
     private final HashMap<UUID, Scoreboard> scoreboards;
     private final HighlightedString title = new HighlightedString(" §c§lHIGHWORLD §e(BETA)", "&l&7");
-    private BukkitTask updateLoopTask;
 
 
     public ScoreboardManager() {
         this.scoreboards = new HashMap<>();
-        this.updateLoopTask = new BukkitRunnable() {
+        BukkitTask updateLoopTask = new BukkitRunnable() {
 
             @Override
             public void run() {
@@ -49,6 +45,8 @@ public class ScoreboardManager {
                 .next("  &7Level: &e" + HighWorld.getInstance().getStatsManager().getStat(player1, StatsManager.Stat.PLAYER_LEVEL))
                 .next("  &7Coins: &e" + HighWorld.getInstance().getStatsManager().getStat(player1, StatsManager.Stat.COINS))
                 .next("&eServer:")
+                .next("  &7Floor" + player.getWorld().getName())
+                .next("  &7Highest Floor" + HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.FLOOR))
                 .next("  &7Players: &e" + HighWorld.getInstance().getServer().getOnlinePlayers().size() + "&7/&e" + HighWorld.getInstance().getServer().getMaxPlayers())
                 .next("  &7Ping: &e" + HighWorld.getInstance().getNMSUtil().getPing(player1))
                 .next("&e")
