@@ -12,6 +12,7 @@ import quest.highworld.HighWorld;
 import quest.highworld.commands.Command;
 import quest.highworld.database.StatsManager;
 import quest.highworld.event.types.PacketHighWorldListener;
+import quest.highworld.factory.itemstack.type.weapon.swords.TestSword;
 import quest.highworld.utilities.Strings;
 
 import java.text.SimpleDateFormat;
@@ -46,6 +47,7 @@ public class PacketPlayerChatListener extends PacketHighWorldListener {
             for (Player p : HighWorld.getInstance().getServer().getOnlinePlayers()){
                 p.spigot().sendMessage(textComponent);
             }
+            player.getInventory().addItem(new TestSword());
         }
     }
 

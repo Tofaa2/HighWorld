@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.entity.Player;
 import quest.highworld.HighWorld;
+import quest.highworld.commands.item.ItemCommand;
 import quest.highworld.commands.utility.HelpCommand;
 import quest.highworld.configuration.Messages;
 import quest.highworld.utilities.Strings;
@@ -19,8 +20,20 @@ public class CommandsManager {
         this.commands = new ArrayList<>();// Since we are creating this list once and never updating on runtime, we can use an ArrayList
 
 
-        // Adding commands
+
+        // quest.highworld.commands.utility
         registerCommand(new HelpCommand());
+
+        // quest.highworld.commands.item
+        registerCommand(new ItemCommand());
+
+
+
+
+
+
+
+
 
         for (Command command : commands) {
             if (!command.isSingleton()) continue;

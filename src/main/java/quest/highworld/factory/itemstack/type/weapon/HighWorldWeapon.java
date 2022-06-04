@@ -52,6 +52,25 @@ public class HighWorldWeapon extends AbstractHighWorldItem {
             this.nbtStack.setInteger("Enchantment-" + enchantment.getID(), enchantments.get(enchantment));
         }
 
+        for (ItemStat stat : weaponStats.keySet()) {
+            if (weaponStats.get(stat).getLeft() != 0) {
+                this.nbtStack.setIntArray(stat.getNbtKey(), new int[]{weaponStats.get(stat).getLeft(), weaponStats.get(stat).getRight()});
+            }
+            else {
+                this.nbtStack.setIntArray(stat.getNbtKey(), new int[]{weaponStats.get(stat).getRight()});
+            }
+        }
+
+        for (SpecialAbility ability : specialAbilities){
+            this.nbtStack.setBoolean("Ability-Special-" + ability.name(), true);
+        }
+
+        for (PassiveAbility ability : passiveAbilities){
+            this.nbtStack.setBoolean("Ability-Passive-" + ability.name(), true);
+        }
+
+        this.nbtStack.setString("Item-Type", "Weapon");
+        this.nbtStack.applyNBT(this);
         this.buildLore();
     }
 
@@ -65,7 +84,12 @@ public class HighWorldWeapon extends AbstractHighWorldItem {
         }
         if (!weaponStats.isEmpty()){
             for (ItemStat stat : weaponStats.keySet()){
-                lore.add(Strings.cc("&7" + stat.getPrefix() + ": " + stat.getCc() + weaponStats.get(stat).getLeft() + " - " + weaponStats.get(stat).getRight()));
+                if (weaponStats.get(stat).getLeft() != 0) {
+                    lore.add(Strings.cc("&7" + stat.getPrefix() + ": " + stat.getCc() + weaponStats.get(stat).getLeft() + " - " + weaponStats.get(stat).getRight()));
+                }
+                else {
+                    lore.add(Strings.cc("&7" + stat.getPrefix() + ": " + stat.getCc() + weaponStats.get(stat).getRight()));
+                }
             }
             lore.add(" ");
         }
@@ -93,9 +117,9 @@ public class HighWorldWeapon extends AbstractHighWorldItem {
             lore.add(" ");
         }
         if (enchantments.size() > 0){
-            lore.add(Strings.cc("&8&m----------- &r&8[ ENCHANTMENTS ] &m-----------"));
+            lore.add(Strings.cc("&8&m----------- &r&8[ ENCHANTMENTS ] &m----------"));
             for (Enchantment enchantment : enchantments.keySet()){
-                lore.add(Strings.cc("&7" + enchantment.getPrefix()));
+                lore.add(Strings.cc("&7" + enchantment.getPrefix() + " " + enchantments.get(enchantment)));
             }
         }
         lore.add(Strings.cc("&8&m---------- &r&8[ WEAPON'S STATS ] &m----------"));

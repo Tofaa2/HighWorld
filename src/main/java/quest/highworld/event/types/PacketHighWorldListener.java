@@ -2,12 +2,14 @@ package quest.highworld.event.types;
 
 import com.github.retrooper.packetevents.event.*;
 import com.github.retrooper.packetevents.event.simple.*;
+import quest.highworld.HighWorld;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class PacketHighWorldListener extends SimplePacketListenerAbstract {
 
+    protected HighWorld highworld = HighWorld.getInstance();
     protected static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public PacketHighWorldListener(PacketListenerPriority priority) {

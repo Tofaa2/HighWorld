@@ -3,6 +3,8 @@ package quest.highworld;
 import com.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import lombok.Getter;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 import quest.highworld.commands.CommandsManager;
 import quest.highworld.database.PermissionManager;
@@ -54,6 +56,17 @@ public class HighWorld extends JavaPlugin {
 
         registerEvents();
         getDataFolder().mkdirs();
+
+        runSyncTaskTimer(() ->{getServer().getOnlinePlayers().forEach(player -> {
+            String reg = "&c%h%&8/&c%mh%❤ &9%m%&8/&9%mm%";
+
+            String msg = reg.replace("%h%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.HEALTH)));
+            msg = msg.replace("%mh%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.MAX_HEALTH)));
+            msg = msg.replace("%m%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.MANA)));
+            msg = msg.replace("%mm%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.MAX_MANA)));
+            NMSUtil.sendActionbar(player, msg);
+            });
+        }, 0, 10);
     }
 
     @Override
@@ -76,5 +89,11 @@ public class HighWorld extends JavaPlugin {
     private void registerEvents(){
         getServer().getPluginManager().registerEvents(PlayerDataManager.getInstance(), this); // Data manager
     }
+    public void runSyncTask(Runnable runnable){getServer().getScheduler().runTask(this, runnable);}
+    public void runAsyncTask(Runnable runnable){getServer().getScheduler().runTaskAsynchronously(this, runnable);}
+    public void runSyncTaskLater(Runnable runnable, long delay){getServer().getScheduler().runTaskLater(this, runnable, delay);}
+    public void runAsyncTaskLater(Runnable runnable, long delay){getServer().getScheduler().runTaskLaterAsynchronously(this, runnable, delay);}
+    public void runSyncTaskTimer(Runnable runnable, long delay, long period){getServer().getScheduler().runTaskTimer(this, runnable, delay, period);}
+    public void runAsyncTaskTimer(Runnable runnable, long delay, long period){getServer().getScheduler().runTaskTimerAsynchronously(this, runnable, delay, period);}
 
 }
