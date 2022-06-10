@@ -14,6 +14,7 @@ import quest.highworld.event.HighWorldEventManager;
 import quest.highworld.factory.entity.HighWorldMobManager;
 import quest.highworld.factory.projectile.ProjectileManager;
 import quest.highworld.floor.FloorManager;
+import quest.highworld.gui.GUIManager;
 import quest.highworld.scoreboard.ScoreboardManager;
 import quest.highworld.utilities.nms.NMSUtil;
 
@@ -43,6 +44,8 @@ public class HighWorld extends JavaPlugin {
 
     @Getter private HighWorldMobManager highWorldMobManager;
 
+    @Getter private GUIManager GUIManager;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -59,6 +62,8 @@ public class HighWorld extends JavaPlugin {
         systemUtilities = new SystemUtilities();
         highWorldMobManager = new HighWorldMobManager();
         floorManager = new FloorManager();
+
+        GUIManager = new GUIManager();
 
         registerEvents();
         getDataFolder().mkdirs();

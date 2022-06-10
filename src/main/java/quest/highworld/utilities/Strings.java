@@ -1,11 +1,22 @@
 package quest.highworld.utilities;
 
+import com.google.common.collect.Lists;
 import org.bukkit.ChatColor;
+
+import java.util.List;
 
 public class Strings {
 
     public static String cc(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
+    }
+
+    public static List<String> ccList(String... lines){
+        List<String> list = Lists.newArrayList();
+        for (String line : lines) {
+            list.add(cc(line));
+        }
+        return list;
     }
 
     public static String repeat(String string, int count) {

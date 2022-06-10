@@ -2,7 +2,7 @@ package quest.highworld.commands.utility;
 
 import org.bukkit.entity.Player;
 import quest.highworld.commands.Command;
-import quest.highworld.gui.player.PlayerGUI;
+import quest.highworld.gui.guis.player.PlayerGUI;
 import java.util.Collections;
 import java.util.List;
 

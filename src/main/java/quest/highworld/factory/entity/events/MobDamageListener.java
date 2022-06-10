@@ -17,6 +17,7 @@ import quest.highworld.event.types.BukkitHighWorldListener;
 import quest.highworld.factory.entity.HighWorldMob;
 import quest.highworld.factory.entity.HighWorldMobManager;
 import quest.highworld.utilities.Math;
+import quest.highworld.utilities.PlayerUtil;
 import quest.highworld.utilities.Strings;
 
 
@@ -28,7 +29,7 @@ public class MobDamageListener extends BukkitHighWorldListener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player) {event.setCancelled(true); return;}
+        if (event.getEntity() instanceof Player) return;
         if (!(event.getDamager() instanceof Player player)) return;
 
         Entity raw = event.getEntity();
@@ -79,15 +80,7 @@ public class MobDamageListener extends BukkitHighWorldListener {
         /*
             Some armor-stand damage indicators code
          */
-        Location loc = entity.getLocation().clone().add(0, 1,0);
-        ArmorStand armorStand = loc.getWorld().spawn(loc, ArmorStand.class);
-        armorStand.setVisible(false);
-        armorStand.setSmall(true);
-        armorStand.setCustomName("§c-" + finalDamage);
-        armorStand.setCustomNameVisible(true);
-        armorStand.setGravity(false);
-        armorStand.setMarker(true);
-        HighWorld.getInstance().runSyncTaskLater(armorStand::remove, 20);
+        spawnDamageIndicator(entity.getLocation(), finalDamage);
 
         /*
             Updating the entity health tag
@@ -95,15 +88,58 @@ public class MobDamageListener extends BukkitHighWorldListener {
         entity.setCustomName(Strings.cc(
                 HighWorldMobManager.MOB_NAME_STYLE.replace("%level%", String.valueOf(mob.getLevel()))
                         .replace("%name%", mob.getName())
-                        .replace("%current%", String.valueOf(entity.getHealth()))
-                        .replace("%max%", String.valueOf(mob.getMaxHealth()))));
+                        .replace("%current%", String.valueOf((int) entity.getHealth()))
+                        .replace("%max%", String.valueOf((int) mob.getMaxHealth()))));
     }
+
+    @EventHandler
+    public void onPlayerDamage(EntityDamageByEntityEvent event){
+        if (!(event.getDamager() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof LivingEntity entity)) return;
+
+        HighWorldMob mob = highworld.getHighWorldMobManager().getMob(entity);
+        if (mob == null) return;
+
+        int entityDamage = 0;
+        int entStr = 0;
+        int playerDefense = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.DEFENSE);
+
+        NBTEntity nbtEntity = new NBTEntity(entity);
+        if (nbtEntity.hasKey("Strength")) entStr = nbtEntity.getInteger("Strength");
+        if (nbtEntity.hasKey("Damage")) entityDamage = nbtEntity.getInteger("Damage");
+
+
+        //( DMG * (1 + ( STR / 100 ) ) - (DMG * (DEF/(100+DEF)))
+        int leftSide = entityDamage * (playerDefense / (100 + playerDefense));
+        int rightSide = entityDamage * (entStr / 100);
+        int finalDamage = (rightSide - leftSide);
+        if (finalDamage  < 2) finalDamage = entityDamage;
+        event.setDamage(0);
+        HighWorld.getInstance().getStatsManager().setStat(player, StatsManager.Stat.HEALTH,
+                HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.HEALTH) - finalDamage);
+        if (HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.HEALTH) <= 0) PlayerUtil.killPlayer(player);
+
+
+    }
+
 
 
     private boolean isCritical(Player p){
         return Math.random(0, 100) <= HighWorld.getInstance().getStatsManager().getStat(p, StatsManager.Stat.CRITICAL_CHANCE);
     }
 
+
+    private void spawnDamageIndicator(Location location, int damage){
+        Location loc = location.clone().add(0, 1,0);
+        ArmorStand armorStand = loc.getWorld().spawn(loc, ArmorStand.class);
+        armorStand.setVisible(false);
+        armorStand.setSmall(true);
+        armorStand.setCustomName("§c-" + damage);
+        armorStand.setCustomNameVisible(true);
+        armorStand.setGravity(false);
+        armorStand.setMarker(true);
+        HighWorld.getInstance().runSyncTaskLater(armorStand::remove, 20);
+    }
 
 
 }

@@ -1,11 +1,26 @@
 package quest.highworld.database;
 
 import org.bukkit.entity.Player;
+import quest.highworld.HighWorld;
 import quest.highworld.database.impl.PlayerDataManager;
 
 public class StatsManager {
 
+    public StatsManager(){
 
+        HighWorld.getInstance().runAsyncTaskTimer(() -> {
+            for (Player p : HighWorld.getInstance().getServer().getOnlinePlayers()){
+                int health = getStat(p, Stat.HEALTH);
+                int mana = getStat(p, Stat.MANA);
+                if (health < getStat(p, Stat.MAX_HEALTH)){
+                    setStat(p, Stat.HEALTH, health + 1);
+                }
+                if (mana < getStat(p, Stat.MAX_MANA)){
+                    setStat(p, Stat.MANA, mana + 1);
+                }
+            }
+        }, 0, 10);
+    }
 
     public int getStat(Player player, Stat stat){
         return (int) PlayerDataManager.getInstance().getData(player, "stats." + stat.toString().toLowerCase());

@@ -24,7 +24,7 @@ public abstract class GUI implements InventoryHolder {
     public GUI(String title, int rows){
         this.title = Strings.cc(title);
         this.rows = rows;
-        inventory = Bukkit.createInventory(this, rows * 9, title);
+        inventory = Bukkit.createInventory(this, rows * 9, this.title);
     }
 
 

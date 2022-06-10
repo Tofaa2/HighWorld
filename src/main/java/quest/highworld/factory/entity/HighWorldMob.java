@@ -15,7 +15,7 @@ import java.util.List;
 
 public enum HighWorldMob {
 
-    TEST("&cTest", 10, 100, 0, EntityType.ZOMBIE, null, null, List.of(new LootItem(new TestSword(), 100)));
+    TEST("&cTest", 10, 100, 0, EntityType.ZOMBIE, null, null, List.of(new LootItem(new TestSword(false), 100)));
 
     @Getter private final String name;
     @Getter private final int level;
@@ -50,10 +50,11 @@ public enum HighWorldMob {
         nbtEntity.setDouble("Defense", defense);
 
         entity.setCustomNameVisible(true);
-        //entity.setCustomName(Strings.cc(name + " &c" + (int) maxHealth + "&8/&c" + (int) maxHealth + "❤"));
-
-        entity.setCustomName(Strings.cc(HighWorldMobManager.MOB_NAME_STYLE.replace("%level%", String.valueOf(level))
-                .replace("%name%", name).replace("%current%", String.valueOf((int) maxHealth)).replace("%max%", String.valueOf((int) maxHealth))));
+        entity.setCustomName(Strings.cc(HighWorldMobManager.MOB_NAME_STYLE
+                .replace("%level%", String.valueOf(level))
+                .replace("%name%", name)
+                .replace("%current%", String.valueOf((int) maxHealth))
+                .replace("%max%", String.valueOf((int) maxHealth))));
 
         entity.setMaxHealth(maxHealth);
         entity.setHealth(maxHealth);

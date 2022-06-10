@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class LootItem {
 
-    private AbstractHighWorldItem dropItem;
+    private final AbstractHighWorldItem dropItem;
     private final int minDrops;
     private final int maxDrops;
     private final float chance;

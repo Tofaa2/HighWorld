@@ -1,4 +1,4 @@
-package quest.highworld.gui.player;
+package quest.highworld.gui.guis.player;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
