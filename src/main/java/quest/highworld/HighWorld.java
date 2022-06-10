@@ -3,8 +3,6 @@ package quest.highworld;
 import com.github.retrooper.packetevents.PacketEvents;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import lombok.Getter;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 import quest.highworld.commands.CommandsManager;
 import quest.highworld.database.PermissionManager;
@@ -13,7 +11,9 @@ import quest.highworld.database.SettingsManager;
 import quest.highworld.database.StatsManager;
 import quest.highworld.database.impl.PlayerDataManager;
 import quest.highworld.event.HighWorldEventManager;
+import quest.highworld.factory.entity.HighWorldMobManager;
 import quest.highworld.factory.projectile.ProjectileManager;
+import quest.highworld.floor.FloorManager;
 import quest.highworld.scoreboard.ScoreboardManager;
 import quest.highworld.utilities.nms.NMSUtil;
 
@@ -39,6 +39,10 @@ public class HighWorld extends JavaPlugin {
 
     @Getter private SystemUtilities systemUtilities;
 
+    @Getter private FloorManager floorManager;
+
+    @Getter private HighWorldMobManager highWorldMobManager;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -53,6 +57,8 @@ public class HighWorld extends JavaPlugin {
         commandsManager = new CommandsManager(this);
         projectileManager = new ProjectileManager();
         systemUtilities = new SystemUtilities();
+        highWorldMobManager = new HighWorldMobManager();
+        floorManager = new FloorManager();
 
         registerEvents();
         getDataFolder().mkdirs();

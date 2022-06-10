@@ -4,8 +4,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.entity.Player;
 import quest.highworld.HighWorld;
+import quest.highworld.commands.entity.SpawnCommand;
 import quest.highworld.commands.item.ItemCommand;
 import quest.highworld.commands.utility.HelpCommand;
+import quest.highworld.commands.utility.PlayerMenuCommand;
+import quest.highworld.commands.world.TPFloorCommand;
 import quest.highworld.configuration.Messages;
 import quest.highworld.utilities.Strings;
 
@@ -23,10 +26,16 @@ public class CommandsManager {
 
         // quest.highworld.commands.utility
         registerCommand(new HelpCommand());
+        registerCommand(new PlayerMenuCommand());
 
         // quest.highworld.commands.item
         registerCommand(new ItemCommand());
 
+        // quest.highworld.commands.world
+        registerCommand(new TPFloorCommand());
+
+        // quest.highworld.commands.entity
+        registerCommand(new SpawnCommand());
 
 
 
@@ -40,11 +49,10 @@ public class CommandsManager {
             ((CraftServer) plugin.getServer()).getCommandMap().register("highworld", new org.bukkit.command.Command(command.getName(), command.getDescription(), command.getUsage(), command.getAliases()) {
                 @Override
                 public boolean execute(CommandSender commandSender, String s, String[] args) {
-                    if (!(commandSender instanceof Player)) {
+                    if (!(commandSender instanceof Player player)) {
                         commandSender.sendMessage(Strings.cc("&cYou must be a player to use this command!"));
                         return false;
                     }
-                    Player player = (Player) commandSender;
                     if (!HighWorld.getInstance().getPermissionManager().hasPermission(player, command.getPermission())){
                         player.sendMessage(Strings.cc(Messages.PREFIX.get()) + Messages.NO_PERMISSION.get());
                         return false;
@@ -64,15 +72,12 @@ public class CommandsManager {
                 }
             });
         }
-
         plugin.getCommand("highworld").setExecutor((commandSender, cmd, label, args) -> {
 
-            if (!(commandSender instanceof Player)) {
+            if (!(commandSender instanceof Player player)) {
                 commandSender.sendMessage(Strings.cc("&cYou must be a player to use this command!"));
                 return false;
             }
-
-            Player player = (Player) commandSender;
 
             if (args.length == 0) {
                 String format = Strings.cc(

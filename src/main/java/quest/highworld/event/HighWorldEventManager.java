@@ -7,9 +7,10 @@ import org.bukkit.event.Listener;
 import quest.highworld.HighWorld;
 import quest.highworld.chat.PacketPlayerChatListener;
 import quest.highworld.event.types.PacketHighWorldListener;
+import quest.highworld.factory.entity.events.MobDamageListener;
+import quest.highworld.factory.entity.events.MobDeathListener;
 import quest.highworld.factory.itemstack.ability.PacketItemAbilityListener;
 import quest.highworld.gui.GUIClickListener;
-import quest.highworld.handler.DamageHandlerListener;
 import quest.highworld.scoreboard.ScoreboardSetupListener;
 
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public class HighWorldEventManager {
 
         addListener(new PacketItemAbilityListener());
 
-        addListener(new DamageHandlerListener());
+        //addListener(new DamageHandlerListener());
+        addListener(new MobDamageListener());
+        addListener(new MobDeathListener());
 
 
         register();

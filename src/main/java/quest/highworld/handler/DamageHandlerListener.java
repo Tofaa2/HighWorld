@@ -7,13 +7,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import quest.highworld.HighWorld;
 import quest.highworld.database.StatsManager;
 import quest.highworld.event.types.BukkitHighWorldListener;
 import quest.highworld.factory.itemstack.ability.ItemStat;
 
+@Deprecated
 public class DamageHandlerListener extends BukkitHighWorldListener {
 
 
@@ -102,8 +102,6 @@ public class DamageHandlerListener extends BukkitHighWorldListener {
         return random <= cc;
     }
 
-    private int rand(int min, int max){
-        return (int) (Math.random() * (max - min) + min);
-    }
+    private int rand(int min, int max){return (int) (Math.random() * (max - min) + min);}
 
 }

@@ -1,6 +1,9 @@
 package quest.highworld.database.impl;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import quest.highworld.HighWorld;
+import quest.highworld.database.StatsManager;
 import quest.highworld.factory.itemstack.ability.PacketItemAbilityListener;
 
 import java.io.File;
@@ -125,6 +129,9 @@ public class PlayerDataManager implements Listener {
         HighWorld.getInstance().getPermissionManager().setDefault(p);
         HighWorld.getInstance().getStatsManager().setDefault(p);
         HighWorld.getInstance().getSettingsManager().setDefault(p);
+
+        World w = Bukkit.getWorld("floor-" + HighWorld.getInstance().getStatsManager().getStat(p, StatsManager.Stat.FLOOR));
+        p.teleport(new Location(w, 0, 100, 0));
 
         PacketItemAbilityListener.cooldowns.put(p, new HashMap<>());
 

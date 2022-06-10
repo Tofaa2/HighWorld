@@ -2,6 +2,7 @@ name: HighWorld
 version: 1.0
 author: Tofaa
 main: quest.highworld.HighWorld
+load: POSTWORLD
 
 commands:
   highworld:

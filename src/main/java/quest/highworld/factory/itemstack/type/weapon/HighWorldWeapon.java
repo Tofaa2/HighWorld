@@ -14,10 +14,7 @@ import quest.highworld.factory.itemstack.ability.special.SpecialAbilityInteracti
 import quest.highworld.factory.itemstack.enchantment.Enchantment;
 import quest.highworld.utilities.Strings;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class HighWorldWeapon extends AbstractHighWorldItem {
 
@@ -153,5 +150,19 @@ public class HighWorldWeapon extends AbstractHighWorldItem {
 
     public ItemStack nbtStackAsBukkit(){
         return this.nbtStack.getItem();
+    }
+
+    protected static Pair<Integer, Integer> roll(int lowest, int highest){
+        Pair<Integer, Integer> pair;
+
+        int left = (int) (Math.random() * (highest - lowest) + lowest);
+        int right = (int) (Math.random() * (highest - lowest) + lowest);
+        if (left > right){
+            pair = Pair.of(right, left);
+        }
+        else {
+            pair = Pair.of(left, right);
+        }
+        return pair;
     }
 }
