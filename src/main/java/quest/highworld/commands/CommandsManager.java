@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.entity.Player;
 import quest.highworld.HighWorld;
+import quest.highworld.commands.entity.DamagePlayerCommand;
 import quest.highworld.commands.entity.SpawnCommand;
 import quest.highworld.commands.item.ItemCommand;
 import quest.highworld.commands.utility.HelpCommand;
@@ -36,6 +37,7 @@ public class CommandsManager {
 
         // quest.highworld.commands.entity
         registerCommand(new SpawnCommand());
+        registerCommand(new DamagePlayerCommand());
 
 
 

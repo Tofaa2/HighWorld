@@ -13,6 +13,7 @@ import quest.highworld.scoreboard.util.HighlightedString;
 import java.util.HashMap;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class ScoreboardManager {
 
     private final HashMap<UUID, Scoreboard> scoreboards;
@@ -42,11 +43,11 @@ public class ScoreboardManager {
         scoreboard.setHandler(player1 -> new EntryBuilder().blank()
                 .next("&eInfo:                        ")
                 .next("  &7Name: &e" + player1.getName())
-                .next("  &7Level: &e" + HighWorld.getInstance().getStatsManager().getStat(player1, StatsManager.Stat.PLAYER_LEVEL))
-                .next("  &7Coins: &e" + HighWorld.getInstance().getStatsManager().getStat(player1, StatsManager.Stat.COINS))
+                .next("  &7Level: &e" +  HighWorld.getInstance().getStatsManager().getIntStat(player1, StatsManager.Stat.PLAYER_LEVEL))
+                .next("  &7Coins: &e" +  HighWorld.getInstance().getStatsManager().getIntStat(player1, StatsManager.Stat.COINS))
                 .next("&eServer:")
                 .next("  &7Floor: &e" + player.getWorld().getName().replace("floor-", ""))
-                .next("  &7Highest Floor: &e" + HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.FLOOR))
+                .next("  &7Highest Floor: &e" + HighWorld.getInstance().getStatsManager().getIntStat(player, StatsManager.Stat.FLOOR))
                 .next("  &7Players: &e" + HighWorld.getInstance().getServer().getOnlinePlayers().size() + "&7/&e" + HighWorld.getInstance().getServer().getMaxPlayers())
                 .next("  &7Ping: &e" + HighWorld.getInstance().getNMSUtil().getPing(player1))
                 .next("&e")

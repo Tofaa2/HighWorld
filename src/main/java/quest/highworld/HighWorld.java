@@ -71,10 +71,10 @@ public class HighWorld extends JavaPlugin {
         runSyncTaskTimer(() ->{getServer().getOnlinePlayers().forEach(player -> {
             String reg = "&c%h%&8/&c%mh%❤ &9%m%&8/&9%mm%";
 
-            String msg = reg.replace("%h%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.HEALTH)));
-            msg = msg.replace("%mh%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.MAX_HEALTH)));
-            msg = msg.replace("%m%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.MANA)));
-            msg = msg.replace("%mm%", String.valueOf(statsManager.getStat(player, StatsManager.Stat.MAX_MANA)));
+            String msg = reg.replace("%h%", String.valueOf(statsManager.getIntStat(player, StatsManager.Stat.HEALTH)));
+            msg = msg.replace("%mh%", String.valueOf(statsManager.getIntStat(player, StatsManager.Stat.MAX_HEALTH)));
+            msg = msg.replace("%m%", String.valueOf(statsManager.getIntStat(player, StatsManager.Stat.MANA)));
+            msg = msg.replace("%mm%", String.valueOf(statsManager.getIntStat(player, StatsManager.Stat.MAX_MANA)));
             NMSUtil.sendActionbar(player, msg);
             });
         }, 0, 10);

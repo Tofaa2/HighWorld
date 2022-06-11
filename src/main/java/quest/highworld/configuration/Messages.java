@@ -13,11 +13,11 @@ public enum Messages {
 
     // Rank
     RANK_MEMBER("&7"),
-    RANK_DONATOR("&f[&eDONATOR&f] "),
-    RANK_HELPER("&f[&aHELPER&f] "),
-    RANK_MODERATOR("&f[&bMODERATOR&f] "),
-    RANK_ADMIN("&f[&cADMIN&f] "),
-    RANK_OWNER("&f[&cOWNER&f] "),
+    RANK_DONATOR("&f[&eDONATOR&f] &e"),
+    RANK_HELPER("&f[&aHELPER&f] &a"),
+    RANK_MODERATOR("&f[&bMODERATOR&f] &b"),
+    RANK_ADMIN("&f[&cADMIN&f] &c"),
+    RANK_OWNER("&f[&cOWNER&f] &c"),
 
 
     NO_PERMISSION(THEME_MAIN.msg + "You don't have permission to do that!"),

@@ -60,18 +60,18 @@ public class MobDamageListener extends BukkitHighWorldListener {
             }
         }
         if (isCritical(player)){
-            int crit = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.CRITICAL_DAMAGE);
+            double crit = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.CRITICAL_DAMAGE);
             weaponDamage[0] = (int) (weaponDamage[0] * ((crit + weaponDamage[0]) / 100f));
             weaponDamage[1] = (int) (weaponDamage[1] * ((crit + weaponDamage[1]) / 100f));
         }
 
         int wDamage = Math.random(weaponDamage[0], weaponDamage[1]);
-        int strength = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.STRENGTH);
+        double strength = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.STRENGTH);
 
         //( DMG * (1 + ( STR / 100 ) ) - (DMG * (DEF/(100+DEF)))
-        int leftSide = (int) (wDamage * (entityDefense / (100 + entityDefense)));
-        int rightSide = wDamage * (strength / 100);
-        int finalDamage = (rightSide - leftSide);
+        double leftSide = (int) (wDamage * (entityDefense / (100 + entityDefense)));
+        double rightSide = wDamage * (strength / 100);
+        double finalDamage = (rightSide - leftSide);
         if (finalDamage  < 2) finalDamage = wDamage;
         event.setDamage(0);
         entity.damage(finalDamage);
@@ -80,7 +80,7 @@ public class MobDamageListener extends BukkitHighWorldListener {
         /*
             Some armor-stand damage indicators code
          */
-        spawnDamageIndicator(entity.getLocation(), finalDamage);
+        spawnDamageIndicator(entity.getLocation(), (int) finalDamage);
 
         /*
             Updating the entity health tag
@@ -100,25 +100,24 @@ public class MobDamageListener extends BukkitHighWorldListener {
         HighWorldMob mob = highworld.getHighWorldMobManager().getMob(entity);
         if (mob == null) return;
 
-        int entityDamage = 0;
-        int entStr = 0;
-        int playerDefense = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.DEFENSE);
+        double entityDamage = 0;
+        double entStr = 0;
+        double playerDefense = HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.DEFENSE);
 
         NBTEntity nbtEntity = new NBTEntity(entity);
-        if (nbtEntity.hasKey("Strength")) entStr = nbtEntity.getInteger("Strength");
-        if (nbtEntity.hasKey("Damage")) entityDamage = nbtEntity.getInteger("Damage");
+        if (nbtEntity.hasKey("Strength")) entStr = nbtEntity.getDouble("Strength");
+        if (nbtEntity.hasKey("Damage")) entityDamage = nbtEntity.getDouble("Damage");
 
 
         //( DMG * (1 + ( STR / 100 ) ) - (DMG * (DEF/(100+DEF)))
-        int leftSide = entityDamage * (playerDefense / (100 + playerDefense));
-        int rightSide = entityDamage * (entStr / 100);
-        int finalDamage = (rightSide - leftSide);
+        double leftSide = entityDamage * (playerDefense / (100 + playerDefense));
+        double rightSide = entityDamage * (entStr / 100);
+        double finalDamage = (rightSide - leftSide);
         if (finalDamage  < 2) finalDamage = entityDamage;
         event.setDamage(0);
         HighWorld.getInstance().getStatsManager().setStat(player, StatsManager.Stat.HEALTH,
-                HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.HEALTH) - finalDamage);
-        if (HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.HEALTH) <= 0) PlayerUtil.killPlayer(player);
-
+                (int) (HighWorld.getInstance().getStatsManager().getIntStat(player, StatsManager.Stat.HEALTH) - finalDamage));
+        if (HighWorld.getInstance().getStatsManager().getIntStat(player, StatsManager.Stat.HEALTH) <= 0) PlayerUtil.killPlayer(player);
 
     }
 

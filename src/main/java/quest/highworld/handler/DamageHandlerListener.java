@@ -58,11 +58,11 @@ public class DamageHandlerListener extends BukkitHighWorldListener {
         }
 
 
-        int p1Str = HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.STRENGTH);
+        double p1Str = HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.STRENGTH);
 
         if (item.getIntArray(ItemStat.STRENGTH.getNbtKey()) != null) p1Str += rand(item.getIntArray(ItemStat.STRENGTH.getNbtKey())[0], item.getIntArray(ItemStat.STRENGTH.getNbtKey())[1]);
 
-        int p2Def = HighWorld.getInstance().getStatsManager().getStat(p2, StatsManager.Stat.DEFENSE);
+        double p2Def = HighWorld.getInstance().getStatsManager().getStat(p2, StatsManager.Stat.DEFENSE);
 
         double finalDamage = (wDmg * (1 + (p1Str / 100f)) - (wDmg * (p2Def / (100f + p2Def))));
         if (finalDamage < 0) finalDamage = 0;
@@ -81,7 +81,7 @@ public class DamageHandlerListener extends BukkitHighWorldListener {
 
 
         if (isCrit(p1)) weaponDamage = (int) (weaponDamage * ((HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.CRITICAL_DAMAGE)) /100f));
-        int player1Strength = HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.STRENGTH);
+        double player1Strength = HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.STRENGTH);
 
         int entity2Defense = 0;
         if (e2.getInteger(ItemStat.DEFENSE.getNbtKey()) != null) entity2Defense = e2.getInteger(ItemStat.DEFENSE.getNbtKey());
@@ -97,7 +97,7 @@ public class DamageHandlerListener extends BukkitHighWorldListener {
 
     // Checks if the hit should be a critical hit or not
     private boolean isCrit(Player p1){
-        int cc = HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.CRITICAL_CHANCE);
+        double cc = HighWorld.getInstance().getStatsManager().getStat(p1, StatsManager.Stat.CRITICAL_CHANCE);
         int random = (int) (Math.random() * 100);
         return random <= cc;
     }

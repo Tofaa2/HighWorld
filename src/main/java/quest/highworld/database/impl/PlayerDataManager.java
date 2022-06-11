@@ -130,7 +130,7 @@ public class PlayerDataManager implements Listener {
         HighWorld.getInstance().getStatsManager().setDefault(p);
         HighWorld.getInstance().getSettingsManager().setDefault(p);
 
-        World w = Bukkit.getWorld("floor-" + HighWorld.getInstance().getStatsManager().getStat(p, StatsManager.Stat.FLOOR));
+        World w = Bukkit.getWorld("floor-" + HighWorld.getInstance().getStatsManager().getIntStat(p, StatsManager.Stat.FLOOR));
         p.teleport(new Location(w, 0, 100, 0));
 
         PacketItemAbilityListener.cooldowns.put(p, new HashMap<>());

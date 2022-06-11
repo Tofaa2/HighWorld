@@ -40,8 +40,8 @@ public class PacketPlayerChatListener extends PacketHighWorldListener {
                     "&aRank: &2" + permission.name() + "\n" +
                     "&aFirst Join: &2" + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(HighWorld.getInstance().getPlayDateManager().getFirstJoin(player)) + "\n" +
                     "&aStats: " + "\n" +
-                    "  &2Level: &6" + HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.PLAYER_LEVEL) + "\n" +
-                    "  &2XP: &6" + HighWorld.getInstance().getStatsManager().getStat(player, StatsManager.Stat.PLAYER_XP);
+                    "  &2Level: &6" + HighWorld.getInstance().getStatsManager().getIntStat(player, StatsManager.Stat.PLAYER_LEVEL) + "\n" +
+                    "  &2XP: &6" + HighWorld.getInstance().getStatsManager().getIntStat(player, StatsManager.Stat.PLAYER_XP);
 
             textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Strings.cc(playerInfo)).create()));
             for (Player p : HighWorld.getInstance().getServer().getOnlinePlayers()){

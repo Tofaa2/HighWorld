@@ -10,19 +10,23 @@ public class StatsManager {
 
         HighWorld.getInstance().runAsyncTaskTimer(() -> {
             for (Player p : HighWorld.getInstance().getServer().getOnlinePlayers()){
-                int health = getStat(p, Stat.HEALTH);
-                int mana = getStat(p, Stat.MANA);
-                if (health < getStat(p, Stat.MAX_HEALTH)){
+                int health = getIntStat(p, Stat.HEALTH);
+                int mana = getIntStat(p, Stat.MANA);
+                if (health < getIntStat(p, Stat.MAX_HEALTH)){
                     setStat(p, Stat.HEALTH, health + 1);
                 }
-                if (mana < getStat(p, Stat.MAX_MANA)){
+                if (mana < getIntStat(p, Stat.MAX_MANA)){
                     setStat(p, Stat.MANA, mana + 1);
                 }
             }
         }, 0, 10);
     }
 
-    public int getStat(Player player, Stat stat){
+    public double getStat(Player player, Stat stat){
+        return (double) PlayerDataManager.getInstance().getData(player, "stats." + stat.toString().toLowerCase());
+    }
+
+    public int getIntStat(Player player, Stat stat){
         return (int) PlayerDataManager.getInstance().getData(player, "stats." + stat.toString().toLowerCase());
     }
 

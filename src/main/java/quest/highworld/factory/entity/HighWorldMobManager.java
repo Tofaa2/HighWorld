@@ -9,6 +9,7 @@ import java.util.*;
 public class HighWorldMobManager {
 
     private final HashMap<Entity, HighWorldMob> mobs;
+
     public static final String MOB_NAME_STYLE = "&bLVL %level% &c%name% &7[&6%current%&7/&a%max%&7]";
 
     private HighWorld hw = HighWorld.getInstance();
